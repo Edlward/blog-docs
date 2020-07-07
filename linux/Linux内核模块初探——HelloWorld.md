@@ -74,7 +74,7 @@ clean:
 	make -C /lib/modules/$(KVERS)/build M=$(CURDIR) clean
 ```
 ### 4.1 编译模块：
-![这里写图片描述](https://img-blog.csdn.net/20180615213242453?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](img/1.png)
 
 ### 4.2 加载模块：
 使用命令insmod加载hello.ko
@@ -83,11 +83,11 @@ clean:
 sudo insmod ./hello.ko
 ```
 加载完后使用命令lsmod可以看到hello模块已经被加载到系统中：
-![这里写图片描述](https://img-blog.csdn.net/20180615213252508?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](img/2.png)
 
 ### 4.3 卸载模块：
 使用命令rmmod命令卸载hello模块，卸载完后再用lsmod命令查看hello模块已经不在：
-![这里写图片描述](https://img-blog.csdn.net/2018061521330193?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](img/3.png)
 
 ### 4.4 查看输出
 我们在加载和卸载时候，在控制台并没有看到 "Hello World"的输出，这是因为我们使用的printk给的参数(KERN_INFO),使得日志级别没有控制台要求输出的最低级别高
@@ -98,4 +98,4 @@ sudo insmod ./hello.ko
 cat /var/log/syslog | grep Hello
 ```
 就可以看到我们加载和卸载hello模块的输出信息了：
-![这里写图片描述](https://img-blog.csdn.net/20180615213310978?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](img/4.png)

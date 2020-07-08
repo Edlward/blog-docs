@@ -1,7 +1,7 @@
 # 一、位式控制算法
 传统的控制算法采用位式控制算法:
 
-[1](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/embedded/img/33.png)
+![1](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/embedded/img/33.png)
 
 ## 特点
 1. 位式控制算法输出信号只有H\L两种状态

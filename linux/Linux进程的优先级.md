@@ -7,7 +7,7 @@
 top
 ```
 得到：
-![这里写图片描述](https://img-blog.csdn.net/2018091022335792?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/linux/img/10.png)
 
 可以看到有两个属性 PR 和 NI，这两个就是Priority 和 nice值
 
@@ -41,7 +41,7 @@ ps -l
 ```
 可以看到，nice值为10时，Priority的值也做了相应地改变：
 
-![这里写图片描述](https://img-blog.csdn.net/2018091022340935?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/linux/img/11.png)
 
 
 #### nice可以看做静态优先级，Priority可以看做动态优先级：

@@ -24,7 +24,7 @@
 
 调用一个系统调用示意图：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190107162355640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/linux/img/5.png)
 **下面基于linux-2.6.39内核进行分析**
 ### 2.1.1 初始化系统调用
 内核在初始化期间调用trap_init()函数建立中断描述符表(IDT)中128个向量对应的表项。
@@ -468,7 +468,7 @@ ENTRY(entry_SYSENTER_32)
 
 [英特尔®64和IA-32架构软件开发人员手册合并卷](https://software.intel.com/sites/default/files/managed/39/c5/325462-sdm-vol-1-2abcd-3abcd.pdf)中可以找到syscall指令的相关信息:
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190107162551443.png)
+![在这里插入图片描述](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/linux/img/6.png)
 > SYSCALL invokes an OS system-call handler at privilege level 0. It does so by loading RIP from the IA32_LSTAR MSR (after saving the address of the instruction following SYSCALL into RCX). (The WRMSR instruction ensures that the IA32_LSTAR MSR always contain a canonical address.)
 > SYSCALL also saves RFLAGS into R11 and then masks RFLAGS using the IA32_FMASK MSR (MSR address C0000084H); specifically, the processor clears in RFLAGS every bit corresponding to a bit that is set in the IA32_FMASK MSR.
 > SYSCALL loads the CS and SS selectors with values derived from bits 47:32 of the IA32_STAR MSR. However, the CS and SS descriptor caches are not loaded from the descriptors (in GDT or LDT) referenced by those selectors. Instead, the descriptor caches are loaded with fixed values. See the Operation section for details. It is the responsibility of OS software to ensure that the descriptors (in GDT or LDT) referenced by those selector values correspond to the fixed values loaded into the descriptor caches; the SYSCALL instruction does not ensure this correspondence.
@@ -771,7 +771,7 @@ GLOBAL(entry_SYSCALL_64_after_hwframe)
 ## 3.1 系统调用日志收集系统目的
 系统调用是用户程序与系统打交道的入口，系统调用的安全直接关系到系统的安全，如果一个用户恶意地不断调用fork()将导致系统负载增加，所以如果能收集到是谁调用了一些有危险的系统调用，以及系统调用的时间和其他信息，将有助于系统管理员进行事后追踪，从而提高系统的安全性。
 ## 3.2 系统调用日志收集系统示意图
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2019010716262220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/linux/img/7.png)
 ## 3.3 系统调用日志收集系统实现
 ### 3.3.1 增加系统调用表的表项
 打开**arch/x86/entry/syscalls/syscall_64.tbl**, 添加两个系统调用表项：
@@ -1017,11 +1017,11 @@ int main(int argc, char *argv[])
 }
 ```
 ### 3.3.6 测试系统
-![在这里插入图片描述](https://img-blog.csdnimg.cn/201901071626396.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/linux/img/8.png)
 
 # 四、总结
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2019011010160755.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1phY2hfeg==,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](http://39.106.181.170:8080/getImage?path=/root/code/go/kjblog/resources/blog-docs/linux/img/9.png)
 
 本次报告，先从最早的系统调用方法——int 80开始，基于Linux-2.6.39内核开始分析，对用软中断系统调用的初始化、处理流程和系统调用表进行了学习探究。随后，基于Linux-4.20内核分析学习了从机制上对系统调用进行优化的方法——vsyscalls和vDSO。之后对32位下的快速系统调用指令——sysenter/sysexit进行指令学习和对相关Linux源码分析。然后在Linux-4.20内核下编写调用系统调用的程序，使用gdb进行调试跟踪并分析出最后使用syscall指令执行系统调用，再对64位下的快速系统调用指令syscall/sysret进行指令学习和对相关Linux源码分析。最后在Linux4.20内核上完成一个系统调用日志收集系统，其中包含着添加系统调用，编译内核，修改内核代码，添加内核模块，编写用户态程序测试。
 
